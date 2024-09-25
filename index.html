@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styling/style.css">
+    <title>Nabungela Beauty</title>
+</head>
+<body>
+    
+    <!--Headiing and navigatioin-->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#home">
+                    <img src="assets/pictures/logo.png" alt="NabungelaBeauty Logo" >
+                </a>
+            </div>
+            
+            <input type="checkbox" id="menu-toggle" />
+            <label for="menu-toggle" class="menu-icon">&#9776;</label>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="cta book-now" onclick="location.href='#book'">Book Now</button></li>
+            </ul>
+        </nav>
+
+        <script>
+            // JavaScript code for smooth scrolling (as mentioned above)
+            document.querySelectorAll('.nav-links a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
+            });
+            </script>
+    </header>
+    
+    
+
+    <!--Hero section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Unleash Your Inner Beauty</h1>
+            <p>Unleash your inner glow with Glamify! Our expert team is dedicated to enhancing your natural beauty, providing personalized makeup services that celebrate individuality and confidence. Whether it’s for a special occasion or an everyday look, we’re here to transform your vision into reality. Experience beauty like never before!</p>
+            <a href="#portfolio" class="cta-hero">Explore Our Work</a>
+            <a href="tel:+1234567890" class="cta-call" onclick="makeCall(event)">Call Now: +1 234 567 890</a>
+
+            <!--call now script-->
+            <script>
+            function makeCall(event) {
+                // Prevent the default anchor action
+                event.preventDefault();
+            
+                // Check if the device can make calls
+                const canMakeCall = 'telephony' in navigator; // Check if the 'telephony' API is available
+            
+                if (canMakeCall) {
+                    // If compatible, initiate the call
+                    window.location.href = event.target.href;
+                } else {
+                    // If not compatible, alert the user
+                    alert('This device is not compatible with voice calling functions.');
+                }
+            }
+            </script>
+        </div>
+        <div class="hero-image">
+            <img src="assets/pictures/pexels-craytive-2721977.jpg" alt="Makeup Example">
+        </div>
+    </section>
+    
+    <!--Gallary of Looks-->
+    <section class="portfolio" >
+        <h2 id="portfolio">Our Makeup Portfolio</h2>
+        <div class="portfolio-grid">
+            <div class="card-group top-group">
+                <div class="card">
+                    <img src="assets/pictures/pexels-craytive-2721977.jpg" alt="Glam Makeup" style="width:100%">
+                    <div class="container">
+                        <h4><b>Glam Makeup</b></h4>
+                        <p>Perfect for special occasions.</p>
+                        <a href="javascript:void(0);" onclick="showPopup('glam')" class="see-more">See More</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="assets/pictures/cards/pexels-ekaterina-bolovtsova-4672725.jpg" alt="Bridal Makeup" style="width:100%">
+                    <div class="container">
+                        <h4><b>Bridal Makeup</b></h4>
+                        <p>Enhancing beauty on your big day.</p>
+                        <a href="javascript:void(0);" onclick="showPopup('bridal')" class="see-more">See More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-group bottom-group">
+                <div class="card">
+                    <img src="assets/pictures/cards/pexels-ekaterina-bolovtsova-4672725.jpg" alt="Natural Look" style="width:100%">
+                    <div class="container">
+                        <h4><b>Natural Look</b></h4>
+                        <p>Effortlessly beautiful for everyday wear.</p>
+                        <a href="javascript:void(0);" onclick="showPopup('natural')" class="see-more">See More</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="assets/pictures/pexels-craytive-2721977.jpg" alt="Editorial Makeup" style="width:100%">
+                    <div class="container">
+                        <h4><b>Editorial Makeup</b></h4>
+                        <p>Creative looks for fashion shoots.</p>
+                        <a href="javascript:void(0);" onclick="showPopup('editorial')" class="see-more">See More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Popup Container -->
+        <div id="popup" class="popup" style="display: none;">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <div id="popup-content">
+                <!-- Images will be dynamically inserted here -->
+            </div>
+        </div>
+        
+
+        <script>
+            function showPopup(category) {
+    const popup = document.getElementById('popup');
+    const popupContent = document.getElementById('popup-content');
+    
+    // Clear previous content
+    popupContent.innerHTML = '';
+    
+    // Example images for each category
+    let images = {
+        glam: ['assets/pictures/pexels-craytive-2721977.jpg', 'assets/pictures/pexels-craytive-2721977.jpg'],
+        bridal: ['assets/pictures/pexels-craytive-2721977.jpg', 'assets/pictures/pexels-craytive-2721977.jpg'],
+        natural: ['assets/pictures/pexels-craytive-2721977.jpg', 'assets/pictures/pexels-craytive-2721977.jpg'],
+        editorial: ['assets/pictures/pexels-craytive-2721977.jpg', 'assets/pictures/pexels-craytive-2721977.jpg']
+    };
+
+    // Populate popup with image
+    if (images[category]) {
+        images[category].forEach(img => {
+            const imageElement = document.createElement('img');
+            imageElement.src = img; // Replace with actual image paths
+            imageElement.alt = category;
+            popupContent.appendChild(imageElement);
+        });
+    }
+
+    // Show the popup
+    popup.style.display = 'flex';
+}
+
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+}
+
+
+        </script>
+    </section>
+    
+    <!--About us section-->
+    <section class="about-us" id="about">
+        <div class="about-content">
+          <img src="assets/pictures/backgroung1.png" alt="Owner Image" class="owner-image">
+          <div class="about-text">
+            <h2>About Us</h2>
+            <p>
+              At [Business Name], we specialize in delivering flawless, creative makeup artistry tailored to your unique style and occasion. From bridal beauty to editorial glamour, our expert team is dedicated to enhancing your natural beauty with the highest level of skill and professionalism.
+            </p>
+            <a href="#services" id="explore-services">Explore Our Services</a>
+
+            <!-- Modal Structure -->
+           <!-- Modal Structure -->
+<div id="services-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" id="close-modal">&times;</span>
+        <h2>Our Services</h2>
+        <div class="services-list">
+            <div class="service">
+                <div class="service-details">
+                    <h3>Service 1</h3>
+                    <p>Description of service 1. This provides insights into what we offer.</p>
+                    <p>Price: $100</p>
+                </div>
+                <img src="assets/pictures/backgroung1.png" alt="Service 1 Image" class="service-image" />
+            </div>
+            <div class="service">
+                <div class="service-details">
+                    <h3>Service 2</h3>
+                    <p>Description of service 2. This provides insights into what we offer.</p>
+                    <p>Price: $150</p>
+                </div>
+                <img src="assets/pictures/backgroung1.png" alt="Service 2 Image" class="service-image" />
+            </div>
+            <div class="service">
+                <div class="service-details">
+                    <h3>Service 3</h3>
+                    <p>Description of service 3. This provides insights into what we offer.</p>
+                    <p>Price: $200</p>
+                </div>
+                <img src="assets/pictures/backgroung1.png" alt="Service 3 Image" class="service-image" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+            <!-- JavaScript for Modal -->
+            <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const modal = document.getElementById('services-modal');
+                const closeButton = document.getElementById('close-modal');
+                const exploreButton = document.getElementById('explore-services');
+
+                // Open modal when the button is clicked
+                exploreButton.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default anchor behavior
+                    modal.style.display = 'block'; // Show the modal
+                });
+
+                // Close modal when the close button is clicked
+                closeButton.addEventListener('click', () => {
+                    modal.style.display = 'none'; // Hide the modal
+                });
+
+                // Close modal when clicking outside of the modal content
+                window.addEventListener('click', (event) => {
+                    if (event.target === modal) {
+                        modal.style.display = 'none'; // Hide the modal
+                    }
+                });
+            });
+            </script>
+          </div>
+        </div>
+      </section>
+      
+    <!--Bookings-->
+    <section class="bookings" id="book">
+        <h2>Make a Booking</h2>
+        <p>Ready to glam up? Fill out the form below to book your appointment:</p>
+      
+        <div class="bookings-content">
+          <form action="https://api.whatsapp.com/send" method="get" target="_blank">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+      
+            <label for="date">Preferred Date:</label>
+            <input type="date" id="date" name="date" required>
+      
+            <label for="time">Preferred Time:</label>
+            <input type="time" id="time" name="time" required>
+      
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Any special requests..."></textarea>
+      
+            <button type="submit">Send Booking via WhatsApp</button>
+          </form>
+      
+          <div class="map">
+            <h3>Find Us</h3>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d223074.67485121737!2d26.223222425215496!3d-29.1192059648873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sHotels!5e0!3m2!1sen!2sza!4v1727099624286!5m2!1sen!2sza" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </section>
+      
+      
+    <!--contact us -->
+    <section class="contact-us" id="contact">
+        <h2>Contact Us</h2>
+        <p>Follow us on social media or get in touch directly:</p>
+      
+        <div class="contact-platforms">
+          <a href="https://www.instagram.com" target="_blank">
+            <img src="assets/icons/instagram-2-1-logo-svgrepo-com.svg" alt="Instagram" class="social-icon">
+          </a>
+          <a href="https://www.tiktok.com" target="_blank">
+            <img src="assets/icons/tiktok-icon-white-1-logo-svgrepo-com.svg" alt="TikTok" class="social-icon">
+          </a>
+          <a href="https://www.whatsapp.com" target="_blank">
+            <img src="assets/icons/whatsapp-svgrepo-com.svg" alt="WhatsApp" class="social-icon">
+          </a>
+          <a href="mailto:info@yourmakeupwebsite.com">
+            <img src="assets/icons/email-part-2-svgrepo-com.svg" alt="Email" class="social-icon">
+          </a>
+        </div>
+      
+        <div class="contact-details">
+          <p><strong>Email:</strong> info@yourmakeupwebsite.com</p>
+          <p><strong>Phone:</strong> +123 456 7890</p>
+          <p><strong>Address:</strong> 123 Makeup Street, Beauty City, Glam World</p>
+        </div>
+      </section>
+      
+
+      <!--copyrights-->
+      <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Your Business Name. All Rights Reserved.</p>
+            <p>Follow us on 
+                <a href="https://www.instagram.com" target="_blank">Instagram</a>, 
+                <a href="https://www.whatsapp.com" target="_blank">WhatsApp</a>, 
+                <a href="https://www.tiktok.com" target="_blank">TikTok</a>.
+            </p>
+        </div>
+    </footer>
+    
+    <script src="js/beauty.js"></script>
+
+</body>
+</html>
