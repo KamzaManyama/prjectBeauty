@@ -59,17 +59,18 @@
                 // Prevent the default anchor action
                 event.preventDefault();
             
-                // Check if the device can make calls
-                const canMakeCall = 'telephony' in navigator; // Check if the 'telephony' API is available
+                // Check if the user is on a mobile device
+                const isMobile = /Mobi|Android/i.test(navigator.userAgent);
             
-                if (canMakeCall) {
-                    // If compatible, initiate the call
+                if (isMobile) {
+                    // If on a mobile device, initiate the call
                     window.location.href = event.target.href;
                 } else {
                     // If not compatible, alert the user
-                    alert('This device is not compatible with voice calling functions.');
+                    alert('This device cannot make voice calls. Please use a mobile device to make a call.');
                 }
             }
+
             </script>
         </div>
         <div class="hero-image">
